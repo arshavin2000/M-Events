@@ -2,10 +2,13 @@ package tn.app.ihet.m_events;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +23,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tn.app.ihet.m_events.fragments.HomeFragment;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
@@ -32,14 +36,13 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
-import io.realm.Realm;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import tn.app.ihet.m_events.db.UserManager;
 import tn.app.ihet.m_events.interfaces.UserCallback;
 import tn.app.ihet.m_events.model.User;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,HomeFragment.OnFragmentInteractionListener {
 
     public GoogleApiClient mGoogleApiClient;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
@@ -110,6 +113,13 @@ public class HomeActivity extends AppCompatActivity
 
             }
         });
+
+        HomeFragment fragment = new HomeFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 
 
@@ -217,5 +227,10 @@ public class HomeActivity extends AppCompatActivity
                 .build();
         mGoogleApiClient.connect();
         super.onStart();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
