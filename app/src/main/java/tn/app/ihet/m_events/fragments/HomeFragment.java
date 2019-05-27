@@ -6,18 +6,25 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import tn.app.ihet.m_events.R;
+import tn.app.ihet.m_events.adapters.DataHolder;
 import tn.app.ihet.m_events.adapters.EventAdapter;
 import tn.app.ihet.m_events.db.EventManager;
+import tn.app.ihet.m_events.interfaces.RecyclerViewOnClickPosition;
 import tn.app.ihet.m_events.model.Event;
 
 /**
@@ -34,6 +41,8 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeContainer;
+    private static List<Event> events = new ArrayList<>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -70,6 +79,8 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -79,7 +90,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        EventManager eventManager = new EventManager(getContext());
+        final EventManager eventManager = new EventManager(getContext());
 
         Resources resources = Objects.requireNonNull(getContext()).getResources();
         int resourceId = resources.getIdentifier("event1", "drawable",
@@ -148,9 +159,45 @@ public class HomeFragment extends Fragment {
         Event event12 = new Event(12,"Event12","Event12","","",25.0,resourceId);
         eventManager.addEvent(event12);
 
-        List<Event> events = eventManager.getAllEvents();
-        EventAdapter eventAdapter = new EventAdapter(events,getContext(),getActivity());
+        events = eventManager.getAllEvents();
+        final EventAdapter eventAdapter = new EventAdapter(events, getContext(), getActivity(), new RecyclerViewOnClickPosition() {
+            @Override
+            public void recyclerViewListClicked(View v, int position) {
+                Log.e("hama", "onClick: ");
+                EventDetailsFragment fragment = new EventDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction =
+                        fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.commit();
+                DataHolder.getInstance().setEvent(events.get(position));
+            }
+        });
         recyclerView.setAdapter(eventAdapter);
+
+
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                eventAdapter.clear();
+                // ...the data has come back, add new items to your adapter...
+                 events =  eventManager.getAllEvents();
+                 eventAdapter.setData(events);
+                // Now we call setRefreshing(false) to signal refresh has finished
+                swipeContainer.setRefreshing(false);            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         return view ;
     }
 

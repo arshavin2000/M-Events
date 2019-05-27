@@ -23,6 +23,8 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import tn.app.ihet.m_events.fragments.EventDetailsFragment;
 import tn.app.ihet.m_events.fragments.HomeFragment;
 
 import com.facebook.AccessToken;
@@ -42,7 +44,7 @@ import tn.app.ihet.m_events.interfaces.UserCallback;
 import tn.app.ihet.m_events.model.User;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,HomeFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,HomeFragment.OnFragmentInteractionListener, EventDetailsFragment.OnFragmentInteractionListener {
 
     public GoogleApiClient mGoogleApiClient;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
@@ -164,6 +166,12 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
+            HomeFragment fragment = new HomeFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction =
+                    fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, fragment);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

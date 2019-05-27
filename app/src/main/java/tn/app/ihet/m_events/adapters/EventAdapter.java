@@ -17,19 +17,21 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import tn.app.ihet.m_events.R;
+import tn.app.ihet.m_events.interfaces.RecyclerViewOnClickPosition;
 import tn.app.ihet.m_events.model.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
     private List<Event> events;
-    private View.OnClickListener mOnClickListener;
+    private RecyclerViewOnClickPosition mOnClickListener;
     private Context context;
     private Activity activity;
 
-    public EventAdapter(List<Event> events,Context context,Activity activity)
+    public EventAdapter(List<Event> events,Context context,Activity activity,RecyclerViewOnClickPosition mOnClickListener)
     {
         this.events = events;
         this.context = context;
         this.activity = activity;
+        this.mOnClickListener = mOnClickListener;
     }
 
     @Override
@@ -51,7 +53,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         holder.display(e);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    public void clear() {
+        events.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setData(List<Event> result) {
+        this.events = result;
+        notifyDataSetChanged();
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
 
         private final TextView name;
         private final ImageView picture;
@@ -63,9 +75,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
             name =  itemView.findViewById(R.id.description);
             picture =  itemView.findViewById(R.id.image);
+            itemView.setOnClickListener(this);
 
 
-        }
+         }
 
          void display(Event event) {
             currentEvent = event;
@@ -76,6 +89,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
              int width = size.x;
              int height = size.y;
             Picasso.with(context).load(event.getImage()).resize(width,height/3).into(picture);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            mOnClickListener.recyclerViewListClicked(v,this.getAdapterPosition());
+
+
         }
     }
 
