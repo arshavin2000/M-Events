@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +89,15 @@ public class EventDetailsFragment extends Fragment {
         TextView name = view.findViewById(R.id.title);
         TextView nb = view.findViewById(R.id.nb);
         TextView price = view.findViewById(R.id.price);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateOrDeleteEventFragment updateOrDeleteEventFragment = UpdateOrDeleteEventFragment.getInstance();
+                updateOrDeleteEventFragment.show(getFragmentManager(),UpdateOrDeleteEventFragment.TAG);
+            }
+        });
         description.setText(event.getDescription());
         name.setText(event.getName());
         nb.setText(event.getDate_debut());

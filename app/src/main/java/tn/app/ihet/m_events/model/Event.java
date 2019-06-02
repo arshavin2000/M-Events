@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
 public class Event extends RealmObject {
 
     @PrimaryKey
-    private static int id = 10;
+    private int id ;
     private String name;
     private String description;
     private String date_debut;
@@ -21,7 +21,6 @@ public class Event extends RealmObject {
 
     public Event()
     {
-       id++;
     }
 
     public Event(int id, String name, String description, String date_debut, String date_fin, Double prix, int image) {

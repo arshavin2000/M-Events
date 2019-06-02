@@ -72,7 +72,7 @@ public class EventManager {
 
     }
 
-    public void deleteEvent(String id) {
+    public void deleteEvent(int id) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         Event result = realm.where(Event.class).equalTo("id", id).findFirst();

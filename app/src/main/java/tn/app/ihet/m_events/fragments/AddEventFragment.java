@@ -3,7 +3,6 @@ package tn.app.ihet.m_events.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -66,7 +65,7 @@ public class AddEventFragment extends DialogFragment {
     }
 
     private EditText title, description, info, prix;
-    private Button  add;
+    private Button  add ;
     private ImageView image;
     public static final String TAG = "ADD_EVENT";
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -102,6 +101,7 @@ public class AddEventFragment extends DialogFragment {
         info = view.findViewById(R.id.info);
         prix = view.findViewById(R.id.prix);
         add = view.findViewById(R.id.add);
+
         image = view.findViewById(R.id.image);
 
         ButterKnife.bind(getActivity());
@@ -113,12 +113,15 @@ public class AddEventFragment extends DialogFragment {
                 selectImage();
             }
         });
+        final EventManager eventManager = new EventManager(getContext());
+
+
+
 
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventManager eventManager = new EventManager(getContext());
                 event.setName(title.getText().toString());
                 event.setDescription(description.getText().toString());
                 try {
@@ -130,8 +133,12 @@ public class AddEventFragment extends DialogFragment {
 
                 }
                 event.setDate_debut(info.getText().toString());
+                event.setId(eventManager.getAllEvents().get(eventManager.getAllEvents().size()-1).getId()+1);
                 eventManager.addEvent(event);
                 HomeFragment.eventAdapter.setData(eventManager.getAllEvents());
+
+                getActivity().finish();
+                startActivity(getActivity().getIntent());
              //   getInstance().dismiss();
                 Fragment prev = getFragmentManager().findFragmentByTag(TAG);
                 if (prev != null) {
@@ -143,6 +150,8 @@ public class AddEventFragment extends DialogFragment {
 
             }
         });
+
+
 
 
         View v = Objects.requireNonNull(getDialog().getWindow()).getDecorView();
