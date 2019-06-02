@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import tn.app.ihet.m_events.fragments.AboutFragment;
 import tn.app.ihet.m_events.fragments.AddEventFragment;
 import tn.app.ihet.m_events.fragments.EventDetailsFragment;
 import tn.app.ihet.m_events.fragments.HomeFragment;
@@ -45,7 +46,7 @@ import tn.app.ihet.m_events.interfaces.UserCallback;
 import tn.app.ihet.m_events.model.User;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,HomeFragment.OnFragmentInteractionListener, EventDetailsFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,HomeFragment.OnFragmentInteractionListener, EventDetailsFragment.OnFragmentInteractionListener , AboutFragment.OnFragmentInteractionListener {
 
     public GoogleApiClient mGoogleApiClient;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
@@ -145,9 +146,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -159,7 +158,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            // home
             HomeFragment fragment = new HomeFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction =
@@ -172,7 +171,13 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_tools) {
 
+            // cgu
+
+            startActivity(new Intent(HomeActivity.this, AboutActivity.class));
+
         } else if (id == R.id.nav_share) {
+
+
 
         } else if (id == R.id.logout) {
 
