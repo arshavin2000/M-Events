@@ -8,19 +8,20 @@ import io.realm.annotations.PrimaryKey;
 public class Event extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private static int id = 10;
     private String name;
     private String description;
     private String date_debut;
     private String date_fin;
     private Double prix;
     private int image;
+    private String imageString;
 
 
 
     public Event()
     {
-
+       id++;
     }
 
     public Event(int id, String name, String description, String date_debut, String date_fin, Double prix, int image) {
@@ -87,5 +88,13 @@ public class Event extends RealmObject {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getImageString() {
+        return imageString;
+    }
+
+    public void setImageString(String imageString) {
+        this.imageString = imageString;
     }
 }

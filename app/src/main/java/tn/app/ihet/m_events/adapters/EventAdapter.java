@@ -2,7 +2,10 @@ package tn.app.ihet.m_events.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -13,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -88,7 +92,19 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
              display.getSize(size);
              int width = size.x;
              int height = size.y;
-            Picasso.with(context).load(event.getImage()).resize(width,height/3).into(picture);
+             if(event.getImage() != 0)
+             Picasso.with(context).load(event.getImage()).resize(width,height/3).into(picture);
+             else
+             {
+                 Bitmap bitmap = BitmapFactory.decodeFile(event.getImageString());
+                 picture.setImageBitmap(bitmap);
+                 picture.getLayoutParams().height = height/3;
+                 picture.getLayoutParams().width = width;
+                 picture.requestLayout();
+
+
+                 // Picasso.with(context).load(event.getImageString()).resize(width,height/3).into(picture);
+             }
         }
 
         @Override
@@ -99,5 +115,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
         }
     }
+
 
 }

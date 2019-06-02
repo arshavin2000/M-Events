@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeContainer;
     private static List<Event> events = new ArrayList<>();
+    public static  EventAdapter eventAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,72 +97,35 @@ public class HomeFragment extends Fragment {
         Resources resources = Objects.requireNonNull(getContext()).getResources();
         int resourceId = resources.getIdentifier("event1", "drawable",
                 getContext().getPackageName());
-        Event event1 = new Event(1,"Event1","Event2","","",25.0,resourceId);
+        Event event1 = new Event(1,"La cuisine tunisienne","Déguster un menu 100% tunisien, c’est possible cette semaine du mardi à jeudi soir grâce aux étudiants de Sidi Dhrif qui sont accompagné par les meilleurs chefs de gastro tunisien  comme chef Haykil bin ZAYDA etc ,,, pour vous faire revivre au beau vieux temps  la cuisine tunisienne de nous grand-mère avec une touche moderne et raffinée  \n","NB : soyer présent avant une demi heure de l’heure de diner ","",15.0,resourceId);
         eventManager.addEvent(event1);
 
         resourceId = resources.getIdentifier("event2", "drawable",
                 getContext().getPackageName());
-        Event event2 = new Event(2,"Event2","Event2","","",25.0,resourceId);
+        Event event2 = new Event(2,"Soirée française","Cette semaine du mardi à jeudi  toutes les soirées sont  dans le thème de la gastronomie française créer par les futures chefs de Sidi Dhrif, des démonstrations culinaires et des repas spéciaux. Le but de la démarche est de faire découvrir la diversité de la cuisine gastronomique d’aujourd’hui et de promouvoir toute la richesse de la cuisine et de la pâtisserie.\n","NB : soyer présent avant une demi heure de l’heure de diner ","",15.0,resourceId);
         eventManager.addEvent(event2);
 
         resourceId = resources.getIdentifier("event3", "drawable",
                 getContext().getPackageName());
-        Event event3 = new Event(3,"Event3","Event3","","",25.0,resourceId);
+        Event event3 = new Event(3,"Soirée pêcheur ","La cuisine de mer est un continent vierge dont les explorateurs rechignent à sortir des sentiers battus. Cet événement, organisé dans le cadre d’exploiter les ressources maritime tunisienne. Une excellente initiative pour vivre la richesse et la qualité des produits de mer ; un pur délice. Des produits frais et une touche tunisienne par les étudiants de Sidi Dhrif que cette semaine vont nous rêver par des plats gastronomique.\n","NB : soyer présent avant une demi heure de l’heure de diner","",15.0,resourceId);
         eventManager.addEvent(event3);
 
         resourceId = resources.getIdentifier("event4", "drawable",
                 getContext().getPackageName());
-        Event event4 = new Event(4,"Event4","Event4","","",25.0,resourceId);
+        Event event4 = new Event(4,"La cuisine tunisienne","Déguster un menu 100% tunisien, c’est possible cette semaine du mardi à jeudi soir grâce aux étudiants de Sidi Dhrif qui sont accompagné par les meilleurs chefs de gastro tunisien  comme chef Haykil bin ZAYDA etc ,,, pour vous faire revivre au beau vieux temps  la cuisine tunisienne de nous grand-mère avec une touche moderne et raffinée  \n","NB : soyer présent avant une demi heure de l’heure de diner \n","",15.0,resourceId);
         eventManager.addEvent(event4);
 
 
         resourceId = resources.getIdentifier("event5", "drawable",
                 getContext().getPackageName());
-        Event event5 = new Event(5,"Event5","Event5","","",25.0,resourceId);
+        Event event5 = new Event(5,"Soirée française","Cette semaine du mardi à jeudi  toutes les soirées sont  dans le thème de la gastronomie française créer par les futures chefs de Sidi Dhrif, des démonstrations culinaires et des repas spéciaux. Le but de la démarche est de faire découvrir la diversité de la cuisine gastronomique d’aujourd’hui et de promouvoir toute la richesse de la cuisine et de la pâtisserie.\n","NB : soyer présent avant une demi heure de l’heure de diner \n","",15.0,resourceId);
         eventManager.addEvent(event5);
 
 
-        resourceId = resources.getIdentifier("event6", "drawable",
-                getContext().getPackageName());
-        Event event6 = new Event(6,"Event6","Event6","","",25.0,resourceId);
-        eventManager.addEvent(event6);
 
-
-        resourceId = resources.getIdentifier("event7", "drawable",
-                getContext().getPackageName());
-        Event event7 = new Event(7,"Event7","Event7","","",25.0,resourceId);
-        eventManager.addEvent(event7);
-
-        resourceId = resources.getIdentifier("event8", "drawable",
-                getContext().getPackageName());
-        Event event8 = new Event(8,"Event8","Event8","","",25.0,resourceId);
-        eventManager.addEvent(event8);
-
-
-        resourceId = resources.getIdentifier("event9", "drawable",
-                getContext().getPackageName());
-        Event event9 = new Event(9,"Event9","Event9","","",25.0,resourceId);
-        eventManager.addEvent(event9);
-
-
-        resourceId = resources.getIdentifier("event10", "drawable",
-                getContext().getPackageName());
-        Event event10 = new Event(10,"Event10","Event10","","",25.0,resourceId);
-        eventManager.addEvent(event10);
-
-        resourceId = resources.getIdentifier("event11", "drawable",
-                getContext().getPackageName());
-        Event event11 = new Event(11,"Event11","Event11","","",25.0,resourceId);
-        eventManager.addEvent(event11);
-
-
-        resourceId = resources.getIdentifier("event12", "drawable",
-                getContext().getPackageName());
-        Event event12 = new Event(12,"Event12","Event12","","",25.0,resourceId);
-        eventManager.addEvent(event12);
 
         events = eventManager.getAllEvents();
-        final EventAdapter eventAdapter = new EventAdapter(events, getContext(), getActivity(), new RecyclerViewOnClickPosition() {
+         eventAdapter = new EventAdapter(events, getContext(), getActivity(), new RecyclerViewOnClickPosition() {
             @Override
             public void recyclerViewListClicked(View v, int position) {
                 Log.e("hama", "onClick: ");
@@ -198,6 +163,15 @@ public class HomeFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddEventFragment paymentDialog = AddEventFragment.getInstance();
+                paymentDialog.show(getFragmentManager(), AddEventFragment.TAG);
+            }
+        });
         return view ;
     }
 

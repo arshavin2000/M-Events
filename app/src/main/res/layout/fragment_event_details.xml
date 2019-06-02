@@ -75,7 +75,8 @@
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginRight="@dimen/spacing_large"
                         android:layout_marginTop="@dimen/spacing_large"
-                        android:text="Achref"
+                        android:text="ok"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
                     <TextView
@@ -83,8 +84,34 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_large"
+                        android:textSize="20sp"
+                        android:padding="16dp"
                         android:text="@string/lorem_ipsum"
+                        />
+
+                    <TextView
+                        android:id="@+id/nb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_large"
+                        android:textSize="16sp"
+                        android:text="@string/lorem_ipsum"
+                        android:padding="16dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_large"
+                        android:textSize="20sp"
+                        android:text="@string/lorem_ipsum"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:padding="16dp"
+
+                        />
 
                 </LinearLayout>
 

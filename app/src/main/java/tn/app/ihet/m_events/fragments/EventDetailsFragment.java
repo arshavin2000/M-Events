@@ -1,6 +1,8 @@
 package tn.app.ihet.m_events.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -84,8 +86,12 @@ public class EventDetailsFragment extends Fragment {
         ImageView imageView = view.findViewById(R.id.image);
         TextView description = view.findViewById(R.id.description);
         TextView name = view.findViewById(R.id.title);
+        TextView nb = view.findViewById(R.id.nb);
+        TextView price = view.findViewById(R.id.price);
         description.setText(event.getDescription());
         name.setText(event.getName());
+        nb.setText(event.getDate_debut());
+        price.setText("Prix : "+ event.getPrix() + " DT");
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -114,9 +120,21 @@ public class EventDetailsFragment extends Fragment {
 
 
 //        description.setText(event.getDescription());
+        if(event.getImage() != 0)
         Picasso.with(getContext()).load(event.getImage())
                 .resize(width, Double.valueOf(height * 0.3).intValue())
                .into(imageView);
+        else
+        {
+            Bitmap bitmap = BitmapFactory.decodeFile(event.getImageString());
+            imageView.setImageBitmap(bitmap);
+            imageView.getLayoutParams().height = height/3;
+            imageView.getLayoutParams().width = width;
+            imageView.requestLayout();
+
+
+            // Picasso.with(context).load(event.getImageString()).resize(width,height/3).into(picture);
+        }
         return view ;
     }
 
