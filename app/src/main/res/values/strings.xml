@@ -29,5 +29,7 @@
     <string name="more">More</string>
     <string name="settings">Settings</string>
 
+    <string name="access_token">pk.eyJ1IjoiYXJzaGF2aW4xOTk0IiwiYSI6ImNqd2puNmVoNTBsa3g0MG42bG9xdTgyZGoifQ.OksurF3mHfvOcccdsADlCA</string>
+
 
 </resources>

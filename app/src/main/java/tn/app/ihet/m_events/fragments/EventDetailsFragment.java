@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import tn.app.ihet.m_events.R;
 import tn.app.ihet.m_events.adapters.DataHolder;
+import tn.app.ihet.m_events.db.EventManager;
 import tn.app.ihet.m_events.model.Event;
 
 /**
@@ -83,13 +85,31 @@ public class EventDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event_details, container, false);
-        Event event = DataHolder.getInstance().getEvent();
+        final Event event = DataHolder.getInstance().getEvent();
         ImageView imageView = view.findViewById(R.id.image);
         TextView description = view.findViewById(R.id.description);
         TextView name = view.findViewById(R.id.title);
         TextView nb = view.findViewById(R.id.nb);
         TextView price = view.findViewById(R.id.price);
         FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        RatingBar ratingBar = view.findViewById(R.id.rating);
+
+        ratingBar.setRating(event.getRating().floatValue());
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+                EventManager eventManager = new EventManager(getContext());
+
+                eventManager.deleteEvent(event.getId());
+                event.setRating((double) rating);
+                eventManager.addEvent(event);
+
+            }
+        });
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

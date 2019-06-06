@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -79,7 +80,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
             name =  itemView.findViewById(R.id.description);
             picture =  itemView.findViewById(R.id.image);
-            itemView.setOnClickListener(this);
+                     itemView.setOnClickListener(this);
+
 
 
          }

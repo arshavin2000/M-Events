@@ -110,6 +110,8 @@
                 android:textOn=""
                 app:layout_constraintEnd_toEndOf="@+id/image"
                 app:layout_constraintTop_toTopOf="@+id/image" />
+
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.design.card.MaterialCardView>

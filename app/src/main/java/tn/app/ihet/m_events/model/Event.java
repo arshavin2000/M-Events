@@ -16,6 +16,7 @@ public class Event extends RealmObject {
     private Double prix;
     private int image;
     private String imageString;
+    private Double rating;
 
 
 
@@ -31,6 +32,25 @@ public class Event extends RealmObject {
         this.date_fin = date_fin;
         this.prix = prix;
         this.image = image;
+    }
+
+    public Event(int id, String name, String description, String date_debut, String date_fin, Double prix, int image, Double rating) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+        this.prix = prix;
+        this.image = image;
+        this.rating = rating;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public int getId() {
@@ -95,5 +115,20 @@ public class Event extends RealmObject {
 
     public void setImageString(String imageString) {
         this.imageString = imageString;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date_debut='" + date_debut + '\'' +
+                ", date_fin='" + date_fin + '\'' +
+                ", prix=" + prix +
+                ", image=" + image +
+                ", imageString='" + imageString + '\'' +
+                ", rating=" + rating +
+                '}';
     }
 }

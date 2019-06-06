@@ -38,10 +38,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import tn.app.ihet.m_events.db.UserManager;
+import tn.app.ihet.m_events.fragments.MapFragment;
 import tn.app.ihet.m_events.interfaces.UserCallback;
 import tn.app.ihet.m_events.model.User;
 
@@ -58,6 +60,8 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Mapbox.getInstance(getApplicationContext(), getString(R.string.access_token));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         final NavigationView navigationView = findViewById(R.id.nav_view);
@@ -166,8 +170,12 @@ public class HomeActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.container, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
+            MapFragment fragment = new MapFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction =
+                    fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, fragment);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_tools) {
 
@@ -175,11 +183,11 @@ public class HomeActivity extends AppCompatActivity
 
             startActivity(new Intent(HomeActivity.this, AboutActivity.class));
 
-        } else if (id == R.id.nav_share) {
-
-
-
-        } else if (id == R.id.logout) {
+//        } else if (id == R.id.nav_share) {
+//
+//
+//
+//        } else if (id == R.id.logout) {
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 

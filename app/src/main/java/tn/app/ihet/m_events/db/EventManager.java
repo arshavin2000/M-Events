@@ -88,4 +88,6 @@ public class EventManager {
         return realm.copyFromRealm(query.findAll());
 
     }
+
+
 }

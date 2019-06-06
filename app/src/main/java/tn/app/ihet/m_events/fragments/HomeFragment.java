@@ -94,37 +94,39 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         final EventManager eventManager = new EventManager(getContext());
 
-        Resources resources = Objects.requireNonNull(getContext()).getResources();
-        int resourceId = resources.getIdentifier("event1", "drawable",
-                getContext().getPackageName());
-        Event event1 = new Event(1,"La cuisine tunisienne","Déguster un menu 100% tunisien, c’est possible cette semaine du mardi à jeudi soir grâce aux étudiants de Sidi Dhrif qui sont accompagné par les meilleurs chefs de gastro tunisien  comme chef Haykil bin ZAYDA etc ,,, pour vous faire revivre au beau vieux temps  la cuisine tunisienne de nous grand-mère avec une touche moderne et raffinée  \n","NB : soyer présent avant une demi heure de l’heure de diner ","",15.0,resourceId);
-        eventManager.addEvent(event1);
-
-        resourceId = resources.getIdentifier("event2", "drawable",
-                getContext().getPackageName());
-        Event event2 = new Event(2,"Soirée française","Cette semaine du mardi à jeudi  toutes les soirées sont  dans le thème de la gastronomie française créer par les futures chefs de Sidi Dhrif, des démonstrations culinaires et des repas spéciaux. Le but de la démarche est de faire découvrir la diversité de la cuisine gastronomique d’aujourd’hui et de promouvoir toute la richesse de la cuisine et de la pâtisserie.\n","NB : soyer présent avant une demi heure de l’heure de diner ","",15.0,resourceId);
-        eventManager.addEvent(event2);
-
-        resourceId = resources.getIdentifier("event3", "drawable",
-                getContext().getPackageName());
-        Event event3 = new Event(3,"Soirée pêcheur ","La cuisine de mer est un continent vierge dont les explorateurs rechignent à sortir des sentiers battus. Cet événement, organisé dans le cadre d’exploiter les ressources maritime tunisienne. Une excellente initiative pour vivre la richesse et la qualité des produits de mer ; un pur délice. Des produits frais et une touche tunisienne par les étudiants de Sidi Dhrif que cette semaine vont nous rêver par des plats gastronomique.\n","NB : soyer présent avant une demi heure de l’heure de diner","",15.0,resourceId);
-        eventManager.addEvent(event3);
-
-        resourceId = resources.getIdentifier("event4", "drawable",
-                getContext().getPackageName());
-        Event event4 = new Event(4,"La cuisine tunisienne","Déguster un menu 100% tunisien, c’est possible cette semaine du mardi à jeudi soir grâce aux étudiants de Sidi Dhrif qui sont accompagné par les meilleurs chefs de gastro tunisien  comme chef Haykil bin ZAYDA etc ,,, pour vous faire revivre au beau vieux temps  la cuisine tunisienne de nous grand-mère avec une touche moderne et raffinée  \n","NB : soyer présent avant une demi heure de l’heure de diner \n","",15.0,resourceId);
-        eventManager.addEvent(event4);
-
-
-        resourceId = resources.getIdentifier("event5", "drawable",
-                getContext().getPackageName());
-        Event event5 = new Event(5,"Soirée française","Cette semaine du mardi à jeudi  toutes les soirées sont  dans le thème de la gastronomie française créer par les futures chefs de Sidi Dhrif, des démonstrations culinaires et des repas spéciaux. Le but de la démarche est de faire découvrir la diversité de la cuisine gastronomique d’aujourd’hui et de promouvoir toute la richesse de la cuisine et de la pâtisserie.\n","NB : soyer présent avant une demi heure de l’heure de diner \n","",15.0,resourceId);
-        eventManager.addEvent(event5);
-
-
-
-
         events = eventManager.getAllEvents();
+
+        if (events.size() < 1) {
+            Resources resources = Objects.requireNonNull(getContext()).getResources();
+            int resourceId = resources.getIdentifier("event1", "drawable",
+                    getContext().getPackageName());
+            final Event event1 = new Event(1, "La cuisine tunisienne", "Déguster un menu 100% tunisien, c’est possible cette semaine du mardi à jeudi soir grâce aux étudiants de Sidi Dhrif qui sont accompagné par les meilleurs chefs de gastro tunisien  comme chef Haykil bin ZAYDA etc ,,, pour vous faire revivre au beau vieux temps  la cuisine tunisienne de nous grand-mère avec une touche moderne et raffinée  \n", "NB : soyer présent avant une demi heure de l’heure de diner ", "", 15.0, resourceId, 0.0);
+            eventManager.addEvent(event1);
+
+            resourceId = resources.getIdentifier("event2", "drawable",
+                    getContext().getPackageName());
+            Event event2 = new Event(2, "Soirée française", "Cette semaine du mardi à jeudi  toutes les soirées sont  dans le thème de la gastronomie française créer par les futures chefs de Sidi Dhrif, des démonstrations culinaires et des repas spéciaux. Le but de la démarche est de faire découvrir la diversité de la cuisine gastronomique d’aujourd’hui et de promouvoir toute la richesse de la cuisine et de la pâtisserie.\n", "NB : soyer présent avant une demi heure de l’heure de diner ", "", 15.0, resourceId, 0.0);
+            eventManager.addEvent(event2);
+
+            resourceId = resources.getIdentifier("event3", "drawable",
+                    getContext().getPackageName());
+            Event event3 = new Event(3, "Soirée pêcheur ", "La cuisine de mer est un continent vierge dont les explorateurs rechignent à sortir des sentiers battus. Cet événement, organisé dans le cadre d’exploiter les ressources maritime tunisienne. Une excellente initiative pour vivre la richesse et la qualité des produits de mer ; un pur délice. Des produits frais et une touche tunisienne par les étudiants de Sidi Dhrif que cette semaine vont nous rêver par des plats gastronomique.\n", "NB : soyer présent avant une demi heure de l’heure de diner", "", 15.0, resourceId, 0.0);
+            eventManager.addEvent(event3);
+
+            resourceId = resources.getIdentifier("event4", "drawable",
+                    getContext().getPackageName());
+            Event event4 = new Event(4, "La cuisine tunisienne", "Déguster un menu 100% tunisien, c’est possible cette semaine du mardi à jeudi soir grâce aux étudiants de Sidi Dhrif qui sont accompagné par les meilleurs chefs de gastro tunisien  comme chef Haykil bin ZAYDA etc ,,, pour vous faire revivre au beau vieux temps  la cuisine tunisienne de nous grand-mère avec une touche moderne et raffinée  \n", "NB : soyer présent avant une demi heure de l’heure de diner \n", "", 15.0, resourceId, 0.0);
+            eventManager.addEvent(event4);
+
+
+            resourceId = resources.getIdentifier("event5", "drawable",
+                    getContext().getPackageName());
+            Event event5 = new Event(5, "Soirée française", "Cette semaine du mardi à jeudi  toutes les soirées sont  dans le thème de la gastronomie française créer par les futures chefs de Sidi Dhrif, des démonstrations culinaires et des repas spéciaux. Le but de la démarche est de faire découvrir la diversité de la cuisine gastronomique d’aujourd’hui et de promouvoir toute la richesse de la cuisine et de la pâtisserie.\n", "NB : soyer présent avant une demi heure de l’heure de diner \n", "", 15.0, resourceId, 0.0);
+            eventManager.addEvent(event5);
+
+
+        }
+
          eventAdapter = new EventAdapter(events, getContext(), getActivity(), new RecyclerViewOnClickPosition() {
             @Override
             public void recyclerViewListClicked(View v, int position) {
@@ -136,6 +138,9 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.replace(R.id.container, fragment);
                 fragmentTransaction.commit();
                 DataHolder.getInstance().setEvent(events.get(position));
+
+
+                System.out.println("EVENTS "+events.get(position).toString());
             }
         });
         recyclerView.setAdapter(eventAdapter);
