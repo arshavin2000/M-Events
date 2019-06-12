@@ -95,7 +95,7 @@ public class HomeActivity extends AppCompatActivity
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Picasso.with(getApplicationContext()).load(user.getUrlImage()).transform(new RoundedCornersTransformation(150, 0)).resize(200,200).into(picture);
+                            Picasso.with(getApplicationContext()).load(user.getUrlImage()).transform(new RoundedCornersTransformation(150, 0)).resize(100,100).into(picture);
 
                         }
                     });
@@ -187,7 +187,7 @@ public class HomeActivity extends AppCompatActivity
 //
 //
 //
-//        } else if (id == R.id.logout) {
+        } else if (id == R.id.logout) {
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 

@@ -65,7 +65,7 @@ public class AddEventFragment extends DialogFragment {
     }
 
     private EditText title, description, info, prix;
-    private Button  add ;
+    private Button  add , leave ;
     private ImageView image;
     public static final String TAG = "ADD_EVENT";
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -101,6 +101,7 @@ public class AddEventFragment extends DialogFragment {
         info = view.findViewById(R.id.info);
         prix = view.findViewById(R.id.prix);
         add = view.findViewById(R.id.add);
+        leave  = view.findViewById(R.id.leave);
 
         image = view.findViewById(R.id.image);
 
@@ -117,7 +118,13 @@ public class AddEventFragment extends DialogFragment {
 
 
 
+      leave.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              dismiss();
 
+          }
+      });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
